@@ -2,23 +2,57 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thumbspanel</title>
+<style media="screen">
+  div {
+    border: 5px solid green;
+    background-color: yellow;
+    margin: 5px;
+    padding 5px;
+  }
+  #content {
+    border: 5px solid grey;
+    background-color: grey;
+    margin: auto;
+    width: 80%;
+  }
+  .linksBox {
+
+    background-color: yellow;
+  }
+body {
+  background-color: black;
+}
+
+}
+  @media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
+</style>
   </head>
   <body>
+
+
+    <div id="content">
+
+    <div class="linksBox">
     <h1>Thumbspanel</h1>
-
+    </div>
+<div class="linksBox">
   <p><a href="http://172.21.3.4:5000/tutd?thumb=up">Up</a></p>
-
-
   <p><a href="http://172.21.3.4:5000/tutd?thumb=wiggle">Wiggle</a></p>
-
-
   <p><a href="http://172.21.3.4:5000/tutd?thumb=down">Down</a></p>
-
-
+  <p><a href="http://172.21.3.4:5000/tutd?thumb=oops">Undo</a></p>
+  <p><a href="http://172.21.3.4:5000/help">Help</a></p>
+</div>
+<div class="linksBox">
   <p><a href="http://172.21.3.4:5000/say?phrase=Valorant">Valorant</a></p>
-
-
-
+  <p><a href="game.html">Game</a></p>
+</div>
+</body>
+</div>
   </body>
 </html>
