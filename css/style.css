@@ -1,0 +1,45 @@
+div {
+  border: 5px solid green;
+  background-color: yellow;
+  margin: 5px;
+  padding 5px;
+}
+
+#content {
+  border: 5px solid grey;
+  background-color: grey;
+  margin: auto;
+  width: 80%;
+}
+
+.linksBox {
+
+  background-color: yellow;
+}
+
+.linksBox,
+.textbox {
+  border-radius: 20px;
+}
+
+.textBox {
+  overflow: auto;
+}
+
+.textBox img {
+  width: 20%;
+  float: left;
+  clear: left;
+}
+
+body {
+  background-color: black;
+}
+
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
