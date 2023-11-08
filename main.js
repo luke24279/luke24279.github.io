@@ -73,7 +73,6 @@ document.body.onscroll = moveCamera
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera)
-  controls.update()
 }
 Array(500).fill().forEach(addStar)
 animate()
