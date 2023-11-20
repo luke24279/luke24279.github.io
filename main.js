@@ -1,78 +1,78 @@
-import * as THREE from './three.module.js';
-
-
+import * as THREE from 'three';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
-const renderer = new THREE.WebGLRenderer(
-  { canvas: document.querySelector('#bg') }
-);
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.z = 100
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const STARTY = 20
 
-//Light
-const pointLight = new THREE.PointLight(0xffffff, 1000);
-pointLight.position.set(0, 0, 50)
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
-scene.add(pointLight)
-scene.add(ambientLight)
+camera.position.z = 30;
+
+const OSHAGeo = new THREE.PlaneGeometry( 30, 28 );
+const OSHAtexture = new THREE.TextureLoader().load('oshaCert.png')
+const OSHAmat = new THREE.MeshBasicMaterial( {side: THREE.DoubleSide, map: OSHAtexture} );
+const OSHA = new THREE.Mesh( OSHAGeo, OSHAmat );
+
+const ITFGeo = new THREE.PlaneGeometry( 30, 28 );
+const ITFtexture = new THREE.TextureLoader().load('ITF.png')
+const ITFmat = new THREE.MeshBasicMaterial( {side: THREE.DoubleSide, map: ITFtexture} );
+const ITF = new THREE.Mesh( ITFGeo, ITFmat );
+
+const CIWGeo = new THREE.PlaneGeometry( 30, 28 );
+const CIWtexture = new THREE.TextureLoader().load('CIW.png')
+const CIWmat = new THREE.MeshBasicMaterial( {side: THREE.DoubleSide, map: CIWtexture} );
+const CIW = new THREE.Mesh( CIWGeo, CIWmat );
 
 
-//Helpers
-const lightHelper = new THREE.PointLightHelper(pointLight)
-const gridHelper = new THREE.GridHelper(200, 50)
-const axesHelper = new THREE.AxesHelper(20, 20, 20)
-// scene.add(lightHelper, gridHelper, axesHelper)
 
-//Pog
-const geoPog = new THREE.CylinderGeometry(41.37, 41.37, 6, 36);
-const texturePog = new THREE.TextureLoader().load("luke.png")
-const matPog = new THREE.MeshStandardMaterial(
-  {
-    color: 0x00ff00,
-    wireframe: false,
-    map: texturePog
-  }
-);
-const pog = new THREE.Mesh(geoPog, matPog)
-scene.add(pog)
+OSHA.rotation.y = STARTY
+OSHA.position.x = -15
+OSHA.scale.set(0.8, 0.75)
+OSHA.position.x -= 8
 
-//Stars
-function addStar() {
-  const geoStar = new THREE.SphereGeometry(Math.round(Math.random() * 2) + 0.5, 24, 24);
-  const textureStar = new THREE.TextureLoader().load("luke.png")
-  const matStar = new THREE.MeshBasicMaterial({ color: 0xffff00, map: textureStar});
-  const star = new THREE.Mesh(geoStar, matStar)
+ITF.rotation.y = STARTY
+ITF.position.x = -15
+ITF.scale.set(0.8, 0.75)
+ITF.position.x -= 8
+ITF.position.y -= 45
 
-  const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(1000))
-  star.position.set(x, y, z);
-  scene.add(star)
-}
-const backgroundPic = new THREE.TextureLoader().load("fuke.jpg")
+CIW.rotation.y = STARTY
+CIW.position.x = -15
+CIW.scale.set(0.8, 0.75)
+CIW.position.x -= 8
+
+CIW.position.y -= 75
+
+
+
+const backgroundPic = new THREE.TextureLoader().load("background.jpg")
 scene.background = backgroundPic
 
+scene.add(OSHA, ITF, CIW);
+const renderer = new THREE.WebGLRenderer( { canvas: document.querySelector('#bg')});
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
 
+const top = document.body.getBoundingClientRect().top;
+camera.position.y = top * 0.05
 function moveCamera() {
-  const t = document.body.getBoundingClientRect().top;
-  camera.position.x = t * -0.0002;
-  camera.position.y = t * -0.0002;
-  camera.position.z = t * -0.01;
-
-  pog.rotation.x += 0.05
-  pog.rotation.y += 0.075
-  pog.rotation.z += 0.05
+    const top = document.body.getBoundingClientRect().top;
+    camera.position.y = top * 0.05
 }
+function resizeWindow() {
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    if (window.innerWidth <= 600) {
+        camera.position.x = -25
+    }
+    else {camera.position.x = 0}
+}
+
+window.addEventListener('resize', resizeWindow)
 document.body.onscroll = moveCamera
-
 function animate() {
-  requestAnimationFrame(animate);
-  renderer.render(scene, camera)
+    requestAnimationFrame(animate)
+    renderer.render(scene, camera)
 }
-Array(500).fill().forEach(addStar)
+
 animate()
+
