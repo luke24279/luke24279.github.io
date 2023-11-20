@@ -7,7 +7,7 @@ const STARTY = 20
 camera.position.z = 30;
 
 const OSHAGeo = new THREE.PlaneGeometry( 30, 28 );
-const OSHAtexture = new THREE.TextureLoader().load('oshaCert.png')
+const OSHAtexture = new THREE.TextureLoader().load('OSHAcert.png')
 const OSHAmat = new THREE.MeshBasicMaterial( {side: THREE.DoubleSide, map: OSHAtexture} );
 const OSHA = new THREE.Mesh( OSHAGeo, OSHAmat );
 
