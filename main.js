@@ -16,10 +16,10 @@ const ITFtexture = new THREE.TextureLoader().load('ITF.png')
 const ITFmat = new THREE.MeshBasicMaterial( {side: THREE.DoubleSide, map: ITFtexture} );
 const ITF = new THREE.Mesh( ITFGeo, ITFmat );
 
-const CIWGeo = new THREE.PlaneGeometry( 30, 28 );
-const CIWtexture = new THREE.TextureLoader().load('CIW.png')
-const CIWmat = new THREE.MeshBasicMaterial( {side: THREE.DoubleSide, map: CIWtexture} );
-const CIW = new THREE.Mesh( CIWGeo, CIWmat );
+const FBJSGeo = new THREE.PlaneGeometry( 30, 28 );
+const FBJStexture = new THREE.TextureLoader().load('FBJS.png')
+const FBJSmat = new THREE.MeshBasicMaterial( {side: THREE.DoubleSide, map: FBJStexture} );
+const FBJS = new THREE.Mesh( FBJSGeo, FBJSmat );
 
 
 
@@ -34,19 +34,19 @@ ITF.scale.set(0.8, 0.75)
 ITF.position.x -= 8
 ITF.position.y -= 45
 
-CIW.rotation.y = STARTY
-CIW.position.x = -15
-CIW.scale.set(0.8, 0.75)
-CIW.position.x -= 8
+FBJS.rotation.y = STARTY
+FBJS.position.x = -15
+FBJS.scale.set(0.8, 0.75)
+FBJS.position.x -= 8
 
-CIW.position.y -= 75
+FBJS.position.y -= 75
 
 
 
 const backgroundPic = new THREE.TextureLoader().load("background.jpg")
 scene.background = backgroundPic
 
-scene.add(OSHA, ITF, CIW);
+scene.add(OSHA, ITF, FBJS);
 const renderer = new THREE.WebGLRenderer( { canvas: document.querySelector('#bg')});
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
